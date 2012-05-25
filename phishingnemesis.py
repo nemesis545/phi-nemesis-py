@@ -3,7 +3,7 @@
 #
 #  phishingnemesis.py
 #  
-#  Copyright 2012 alex ricardo rincon silva <alex@undercity>
+#  Copyright 2012 alex ricardo rincon silva 
 #  
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
