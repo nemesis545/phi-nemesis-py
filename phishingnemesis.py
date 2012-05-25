@@ -21,9 +21,9 @@
 #  MA 02110-1301, USA.
 #  .
 #  
-import urllib2
+import urllib2, os
 from xml.dom import minidom
-import os
+
 clientes = ('Banco','Bancolombia','Falabela','Positiva','Davivienda')
 def obtenerxml():
     os.system("wget -qO- /tmp/online-valid.xml.bz2 http://data.phishtank.com/data/d36cbdb437d93a6e20d8b59b7724a7aeaddd397d06f03150a2c1d4504f794944/online-valid.xml.bz2 | bzip2 -d > /tmp/online-valid.xml")
@@ -50,7 +50,6 @@ def identificar(ruta,clientes):
         else:
             fijo = "Seguro"
     return fijo
-
 
 if __name__ == '__main__':
     os.system("clear")
