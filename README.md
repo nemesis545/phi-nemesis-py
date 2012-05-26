@@ -1,8 +1,9 @@
 phi-nemesis-py
 ==============
 
-check list phishing
-
+check list phishing.
+Need python 2.6 or higher.
+Clients file contains keywords you want to find
   
   Copyright 2012 alex ricardo rincon silva 
   

@@ -21,18 +21,25 @@
 #  MA 02110-1301, USA.
 #  .
 #  
-import urllib2, os
-from xml.dom import minidom
-
-clientes = ('Banco','Bancolombia','Falabela','Positiva','Davivienda')
-def obtenerxml():
-    os.system("wget -qO- /tmp/online-valid.xml.bz2 http://data.phishtank.com/data/d36cbdb437d93a6e20d8b59b7724a7aeaddd397d06f03150a2c1d4504f794944/online-valid.xml.bz2 | bzip2 -d > /tmp/online-valid.xml")
-    listacompletaxml = minidom.parse('/tmp/online-valid.xml')
-    listaentradas = listacompletaxml.getElementsByTagName( 'entry' )
-    dictamen = { x.getElementsByTagName( 'url' )[0].firstChild.nodeValue:[listaentradas[y].getElementsByTagName( 'ip_address' )[0].firstChild.nodeValue,"texto"] for y,x in enumerate(listaentradas) }
-    del(listacompletaxml)
-    #del(listaentradas)
-    return dictamen
+import urllib2, json, bz2
+fuente = open('clients')
+listacruda = fuente.readlines()
+clientes = []
+for gg in listacruda:
+	clientes.append(gg.strip())
+def obtenerjson():
+	dictamen , aaa = {} , 0
+	listacompletajson = json.loads(bz2.decompress(urllib2.urlopen("http://data.phishtank.com/data/d36cbdb437d93a6e20d8b59b7724a7aeaddd397d06f03150a2c1d4504f794944/online-valid.json.bz2").read()))
+	for i in listacompletajson:
+		if len(i["details"]) < 1:
+			print i['target']
+			dictamen[i['url']] = [ i["details"] , i["target"] ]
+			aaa = aaa + 1
+		else:
+			dictamen[i['url']] = [ i["details"][0]['ip_address'] , i["target"] ]
+	print "registro en mal estado --- ",aaa
+	del(listacompletajson)
+	return dictamen
 def identificar(ruta,clientes):
     try:
         fijar = urllib2.urlopen(ruta)
@@ -52,9 +59,8 @@ def identificar(ruta,clientes):
     return fijo
 
 if __name__ == '__main__':
-    os.system("clear")
-    print "procesando xml..."
-    estructura = obtenerxml()
+    print "procesando fuente..."
+    estructura = obtenerjson()
     print "terminada la descarga procesando registros..."
     targets = len(estructura)
     print "son ",targets,"-registros iniciando revision"    
