@@ -37,7 +37,7 @@ def obtenerjson():
 			aaa = aaa + 1
 		else:
 			dictamen[i['url']] = [ i["details"][0]['ip_address'] , i["target"] ]
-	print "registro en mal estado --- ",aaa
+	print "registros en mal estado --- ",aaa
 	del(listacompletajson)
 	return dictamen
 def identificar(ruta,clientes):
