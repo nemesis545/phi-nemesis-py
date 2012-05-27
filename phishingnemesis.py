@@ -22,7 +22,7 @@
 #  .
 #  
 import urllib2, json, bz2
-fuente = open('clients')
+fuente = open('clients.txt')
 listacruda = fuente.readlines()
 clientes = []
 for gg in listacruda:
@@ -66,6 +66,7 @@ if __name__ == '__main__':
     print "son ",targets,"-registros iniciando revision"    
     print "......"
     contador = 0
+    resultado = open('resultado.txt','w')
     for i in estructura :
         contador = contador + 1
         progreso = str(float(contador*100.00/targets))
@@ -73,6 +74,8 @@ if __name__ == '__main__':
         tipourl = estructura[i][1]
         if tipourl !='Seguro':
             tipourl = str(estructura[i][0]) + tipourl
+            resultado.write(i+" -- "+tipourl+"\n")
             print progreso,i,tipourl
         else:
             print str(progreso)[0:5]+"%",i[0:20],tipourl
+	resultado.close()
