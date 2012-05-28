@@ -27,6 +27,7 @@ listacruda = fuente.readlines()
 clientes = []
 for gg in listacruda:
 	clientes.append(gg.strip())
+clientes = filter (lambda paso: paso != "", clientes)
 def obtenerjson():
 	dictamen , aaa = {} , 0
 	listacompletajson = json.loads(bz2.decompress(urllib2.urlopen("http://data.phishtank.com/data/d36cbdb437d93a6e20d8b59b7724a7aeaddd397d06f03150a2c1d4504f794944/online-valid.json.bz2").read()))
