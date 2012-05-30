@@ -79,4 +79,3 @@ if __name__ == '__main__':
             print progreso,i,tipourl
         else:
             print str(progreso)[0:5]+"%",i[0:20],tipourl
-	resultado.close()
